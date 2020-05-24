@@ -21,11 +21,20 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'login.apps.LoginConfig',
+
+    # all auth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+    # provider google & facebook & kakao & github etc
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -107,3 +116,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of 'allauth'
+    'django.contrib.auth.backends.ModelBackend',
+    
+    # 'allauth' specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+SITE_ID = 1
+
+LOGIN_REDIRECT_URL = '/'
+
+## 기타 설정 ##
+# 로그인 몇 번 이상 시도하면 로봇 방지
+# 이메일 형식으로 가입해주세요 등
