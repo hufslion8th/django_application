@@ -1,2 +1,16 @@
-<h1> hello HUFS! </h1>
-<h2> I'm Youngjun </h2>
+{% load socialaccount %}
+{% providers_media_js %}
+
+<h1> 인터넷 응용 - 2020 </h1>
+
+<a href="/accounts/signup">회원가입</a><br>
+
+{% if user.is_authenticated %}
+<a href="/accounts/logout">로그아웃</a><br>
+{{user.username}} 님이 로그인 중
+
+{% else %}
+<a href="{% provider_login_url 'google' %}">구글 로그인</a><br>
+로그인 하세유
+
+{% endif %}
